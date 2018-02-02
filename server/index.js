@@ -17,10 +17,29 @@ app.use(bodyParser.urlencoded({extended: false}));
 // parse application/json
 app.use(bodyParser.json());
 
+const testSchema = mongoose.Schema({
+  term: {
+    type: String,
+    required: true
+  }
+});
+
+const test = mongoose.model("test", testSchema);
+
 // Answer API requests.
 app.get('/api', function (req, res) {
+  const testForm = new test({term: "testingDB"});
+  testForm.save();
+
   res.set('Content-Type', 'application/json');
   res.send('{"message":"Hello from the custom server!"}');
+});
+
+app.get("/api/test", (req, res) => {
+  test.find({})
+    .then(doc=> res.json(doc))
+    .catch(err=> res.send({message: err}))
+
 });
 
 // All remaining requests return the React app, so it can handle routing.
