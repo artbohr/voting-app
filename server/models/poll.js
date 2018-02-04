@@ -1,13 +1,16 @@
 const mongoose = require('mongoose');
 
-const testSchema = mongoose.Schema({
-  name: {
+const pollSchema = mongoose.Schema({
+  pollName: {
     type: String,
     required: true
+  },
+  options: {
+    type: [String],
+     required: true
   }
 });
 
-const test = mongoose.model("test", testSchema);
+const Poll = mongoose.model("Poll", pollSchema);
 
-
-module.exports = mongoose.model('poll', testSchema);
+module.exports = mongoose.model('Poll', pollSchema);
