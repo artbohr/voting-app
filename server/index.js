@@ -43,21 +43,46 @@ app.get('/api/polls', (req, res) => {
     .catch(err=> res.send({message: err}));
 });
 
-// find poll by id
-app.get('/api/poll/:id', (req, res) => {
-  Poll.findById(req.params.id, function (err, doc) {
-    res.send(doc);
-  });
-});
+// perform operations based on poll id
+app.route('/api/poll/:id')
+  // find poll
+  .get((req, res) => {
+    Poll.findById(req.params.id, (err, doc) => {
+      if (err) res.send(err);
 
-/*
-// modify a poll
-app.put('/api/polls', function (req, res) {
-  Poll.findById(docId, function (err, doc) {
+      res.send(doc);
+    });
+  })
+  // vote on the poll
+  .post((req, res) => {
+    Poll.findById(req.params.id, (err, doc) => {
+      // do something
+      console.log('voting')
+    });
+  })
+  // modify a poll
+  .put((req, res) => {
+    Poll.findById(req.params.id, (err, doc) => {
+      if (err) res.send(err);
 
-  });
-});
-*/
+      doc.pollName = req.body.pollName;
+      doc.options = req.body.options;
+      doc.save();
+      res.send(doc);
+      console.log('modifying');
+    });
+  })
+  // delete a poll
+  .delete((req, res) => {
+    Poll.findById(req.params.id, (err, doc) => {
+      if (err) res.send(err);
+
+      doc.remove();
+      res.send('doc removed ' + doc);
+      console.log('deleting');
+    });
+  })
+
 
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', (req, res) => {
