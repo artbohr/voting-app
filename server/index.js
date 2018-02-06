@@ -8,8 +8,13 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// passport
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+
 //models
 const Poll = require('./models/poll');
+const User = require('./models/user');
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI);
@@ -22,12 +27,42 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+
 // Answer API requests.
 app.get('/api', (req, res) => {
   res.set('Content-Type', 'application/json');
   res.send('{"message":"Hello from the custom server!"}');
 });
 
+// auth
+app.post('/api/login',
+  passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: '/login',
+                                   failureFlash: true })
+);
+/*
+// register
+app.post('/api/register', (req, res) => {
+  const userForm = new User({username: req.body.username, password: req.body.password});
+  userForm.save(err=> console.log(err));
+
+  res.status(201).send("created " + userForm.username);
+});
+*/
 // create a single poll
 app.post('/api/createpoll', (req, res) => {
   const pollForm = new Poll({pollName: req.body.pollName, options: req.body.options});
@@ -39,7 +74,7 @@ app.post('/api/createpoll', (req, res) => {
 // show all polls
 app.get('/api/polls', (req, res) => {
   Poll.find({})
-    .then(doc=> res.json(doc))
+    .then(doc=> res.send(doc))
     .catch(err=> res.send({message: err}));
 });
 
