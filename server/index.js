@@ -1,10 +1,12 @@
 require('dotenv').config();
 const express = require('express');
+const session = require('express-session')
 const path = require('path');
 const mongo = require("mongodb");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -27,6 +29,20 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+app.use(cookieParser());
+
+// Express Session
+app.use(session({
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: true
+}));
+
+// Passport init
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 passport.use(new LocalStrategy(
   function(username, password, done) {
     User.findOne({ username: username }, function(err, user) {
@@ -34,7 +50,7 @@ passport.use(new LocalStrategy(
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
-      if (!user.validPassword(password)) {
+      if (!User.validPassword(password)) {
         return done(null, false, { message: 'Incorrect password.' });
       }
       return done(null, user);
@@ -42,19 +58,36 @@ passport.use(new LocalStrategy(
   }
 ));
 
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.getUserById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
 // Answer API requests.
 app.get('/api', (req, res) => {
   res.set('Content-Type', 'application/json');
   res.send('{"message":"Hello from the custom server!"}');
 });
 
+app.get('/api/login', function(req, res) {
+    //res.redirect('/api');
+    res.send('logging failed')
+});
+
 // auth
 app.post('/api/login',
-  passport.authenticate('local', { successRedirect: '/',
-                                   failureRedirect: '/login',
-                                   failureFlash: true })
-);
-/*
+  passport.authenticate('local', { failureRedirect: '/api/login' }),
+  function(req, res) {
+    //res.redirect('/api');
+    res.send('works')
+});
+
+
 // register
 app.post('/api/register', (req, res) => {
   const userForm = new User({username: req.body.username, password: req.body.password});
@@ -62,7 +95,7 @@ app.post('/api/register', (req, res) => {
 
   res.status(201).send("created " + userForm.username);
 });
-*/
+
 // create a single poll
 app.post('/api/createpoll', (req, res) => {
   const pollForm = new Poll({pollName: req.body.pollName, options: req.body.options});
@@ -121,7 +154,7 @@ app.route('/api/poll/:id')
 
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', (req, res) => {
-  response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
+  res.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
 });
 
 app.listen(PORT,  () => {
