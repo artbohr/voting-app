@@ -50,7 +50,7 @@ passport.use(new LocalStrategy(
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
-      if (!User.validPassword(password)) {
+      if (!User.validPassword(password, user)) {
         return done(null, false, { message: 'Incorrect password.' });
       }
       return done(null, user);
@@ -73,17 +73,17 @@ app.get('/api', (req, res) => {
   res.set('Content-Type', 'application/json');
   res.send('{"message":"Hello from the custom server!"}');
 });
-
+/*
 app.get('/api/login', function(req, res) {
     //res.redirect('/api');
     res.send('logging failed')
-});
+});*/
 
 // auth
 app.post('/api/login',
-  passport.authenticate('local', { failureRedirect: '/api/login' }),
+  passport.authenticate('local', { failureRedirect: '/api' }),
   function(req, res) {
-    //res.redirect('/api');
+    
     res.send('works')
 });
 

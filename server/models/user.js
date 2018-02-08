@@ -16,6 +16,11 @@ const User = mongoose.model("User", userSchema);
 
 module.exports = mongoose.model('User', userSchema);
 
-module.exports.validPassword = function(pwd){
-	 return ( this.password === pwd );
-};
+
+module.exports.validPassword = function(pwd, user){
+	return pwd == user.password;
+}
+
+module.exports.getUserById = function(id, callback){
+	User.findById(id, callback);
+}
