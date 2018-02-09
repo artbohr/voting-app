@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
+const morgan = require('morgan');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -28,7 +30,8 @@ app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-
+app.use(morgan('dev'));
+app.use(flash());
 app.use(cookieParser());
 
 // Express Session
@@ -83,7 +86,7 @@ app.get('/api/login', function(req, res) {
 app.post('/api/login',
   passport.authenticate('local', { failureRedirect: '/api' }),
   function(req, res) {
-    
+
     res.send('works')
 });
 
@@ -125,7 +128,6 @@ app.route('/api/poll/:id')
   .post((req, res) => {
     Poll.findById(req.params.id, (err, doc) => {
       // do something
-      console.log('voting')
     });
   })
   // modify a poll
@@ -137,7 +139,6 @@ app.route('/api/poll/:id')
       doc.options = req.body.options;
       doc.save();
       res.send(doc);
-      console.log('modifying');
     });
   })
   // delete a poll
@@ -147,7 +148,6 @@ app.route('/api/poll/:id')
 
       doc.remove();
       res.send('doc removed ' + doc);
-      console.log('deleting');
     });
   })
 
