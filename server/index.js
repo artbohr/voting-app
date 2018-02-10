@@ -53,7 +53,7 @@ passport.use(new LocalStrategy(
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
-      if (!User.validPassword(password, user)) {
+      if (!User.validPassword(password, user.password)) {
         return done(null, false, { message: 'Incorrect password.' });
       }
       return done(null, user);
@@ -76,15 +76,11 @@ app.get('/api', (req, res) => {
   res.set('Content-Type', 'application/json');
   res.send('{"message":"Hello from the custom server!"}');
 });
-/*
-app.get('/api/login', function(req, res) {
-    //res.redirect('/api');
-    res.send('logging failed')
-});*/
+
 
 // auth
 app.post('/api/login',
-  passport.authenticate('local', { failureRedirect: '/api' }),
+  passport.authenticate('local', { failureRedirect: '/api', failureFlash : true }),
   function(req, res) {
 
     res.send('works')
@@ -93,10 +89,17 @@ app.post('/api/login',
 
 // register
 app.post('/api/register', (req, res) => {
-  const userForm = new User({username: req.body.username, password: req.body.password});
-  userForm.save(err=> console.log(err));
+  // check if this username already exists
+  User.find({username : req.body.username}, function (err, docs) {
+    if (docs.length){
+        res.send('Name already exists');
+    }else{
+      const userForm = new User({username: req.body.username, password: User.generateHash(req.body.password)});
+      userForm.save(err=> console.log(err));
 
-  res.status(201).send("created " + userForm.username);
+      res.send("created");
+    }
+  });
 });
 
 // create a single poll
