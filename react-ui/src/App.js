@@ -1,16 +1,23 @@
 import React, {Component} from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 
+import Nav from './components/Nav';
 import Home from './pages/Home';
-import './styles/App.css';
+import Polls from './pages/Polls';
+import NotFound from './pages/NotFound';
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <div>
-          <Route exact path="/" component={Home}/>
+          <Nav/>
+          <Switch>
+            <Route exact path='/' component={Home}/>
+            <Route exact path='/polls' component={Polls}/>
+            <Route path='*' component={NotFound} />
+          </Switch>
         </div>
       </BrowserRouter>
     );
