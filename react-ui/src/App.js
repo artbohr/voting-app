@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Switch, Route } from 'react-router-dom'
 
 import Navigation from './components/Navigation';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import Polls from './pages/Polls';
 import NotFound from './pages/NotFound';
@@ -17,11 +18,12 @@ class App extends Component {
           <Navigation/>
           <Switch>
             <Route exact path='/' component={Home}/>
-            <Route exact path='/polls' component={Polls}/>
-            <Route exact path='/login' component={Login}/>
-            <Route exact path='/register' component={Register}/>
-            <Route path='*' component={NotFound} />
+            <Route path='/polls' component={Polls}/>
+            <Route path='/login' component={Login}/>
+            <Route path='/register' component={Register}/>
+            <Route component={NotFound} />
           </Switch>
+          <Footer/>
         </div>
       </BrowserRouter>
     );

@@ -1,35 +1,32 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
-
+import {Nav, Navbar, NavItem } from 'react-bootstrap';
+import {LinkContainer} from 'react-router-bootstrap';
 
 class Navigation extends React.Component {
-  render () {
-    return (
-      <div>
-        <Navbar>
-          <Navbar.Header>
-            <Navbar.Brand>
-              Voting App
-            </Navbar.Brand>
-          </Navbar.Header>
-          <Nav pullRight>
-            <NavItem>
-              <NavLink to='/' activeClassName='active'>Home</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink to='/polls' activeClassName='active'>Polls</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink to='/login' activeClassName='active'>Login</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink to='/register' activeClassName='active'>Register</NavLink>
-            </NavItem>
-          </Nav>
-        </Navbar>
-      </div>
-    )
+  render() {
+    return (<div>
+      <Navbar>
+        <Navbar.Header>
+          <Navbar.Brand>
+            Voting App
+          </Navbar.Brand>
+        </Navbar.Header>
+        <Nav pullRight>
+          <LinkContainer to="/">
+            <NavItem>Home</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/polls">
+            <NavItem>Polls</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/login">
+            <NavItem>Login</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/register">
+            <NavItem>Register</NavItem>
+          </LinkContainer>
+        </Nav>
+      </Navbar>
+    </div>)
   }
 }
 
