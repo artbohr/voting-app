@@ -1,18 +1,10 @@
-import React, {Component} from 'react';/*
-import {
-  Form,
-  FormGroup,
-  FormControl,
-  Col,
-  Button,
-  ControlLabel
-} from 'react-bootstrap';*/
+import React, {Component} from 'react';
 
 class Register extends Component {
   render() {
     return (<div>
       placeholder
-    </div>);
+    </div>)
   }
 }
 

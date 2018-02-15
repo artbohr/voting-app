@@ -8,7 +8,7 @@ class Polls extends Component {
           polls?
         </p>
       </div>
-    );
+    )
   }
 }
 
