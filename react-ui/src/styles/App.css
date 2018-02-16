@@ -5,3 +5,13 @@ body {
 p{
   text-align: center;
 }
+
+.register{
+  width: 350px;
+}
+
+.footer{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}

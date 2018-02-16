@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
+import PollForm from '../components/PollForm';
 
 class Polls extends Component {
   render() {
     return (
       <div>
-        <p>
-          polls?
-        </p>
+        <PollForm/>
       </div>
     )
   }
