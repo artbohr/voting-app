@@ -15,17 +15,17 @@ class Navigation extends React.Component {
           <div className="collapse navbar-collapse">
             <ul className="nav navbar-nav navbar-right">
               <li>
-                <NavLink to="/polls" activeStyle={{ 'background-color': 'white' }}>
+                <NavLink to="/polls" activeStyle={{ 'backgroundColor': 'white' }}>
                   Polls
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/login" activeStyle={{ 'background-color': 'white' }}>
+                <NavLink to="/login" activeStyle={{ 'backgroundColor': 'white' }}>
                   Login
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/register" activeStyle={{ 'background-color': 'white' }}>
+                <NavLink to="/register" activeStyle={{ 'backgroundColor': 'white' }}>
                   Register
                 </NavLink>
               </li>

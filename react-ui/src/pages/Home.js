@@ -4,30 +4,25 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: null,
-      fetching: true
+      fetchedData: []
     };
   }
 
   componentDidMount() {
-    fetch('/api').then(response => {
-      if (!response.ok) {
-        throw new Error(`status ${response.status}`);
-      }
-      return response.json();
-    }).then(json => {
-      this.setState({message: json.message, fetching: false});
+    fetch('/api/polls').then(response => {
+      response.json().then(data=>(this.setState({fetchedData: data})))
     }).catch(e => {
-      this.setState({message: `API call failed: ${e}`, fetching: false});
+      console.log("nothing was fetched");
     })
   }
 
   render() {
+    const polls = this.state.fetchedData.map(d =>
+      <ul key={d._id}>PollName: {d.pollName} <br/> Options: {d.options.map(option => <li key={option}>{option}</li>)}</ul>)
+
     return (
       <div>
-        <p>
-          {this.state.fetching? 'Fetching message from API': this.state.message}
-        </p>
+        {polls}
       </div>
     );
   }

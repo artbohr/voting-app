@@ -15,7 +15,7 @@ class Register extends Component {
             <form className="form-horizontal" method="post" action="#">
 
               <div className="form-group">
-                <label for="email" className="cols-sm-2 control-label">Your Email</label>
+                <label className="cols-sm-2 control-label">Your Email</label>
                 <div className="cols-sm-10">
                   <div className="input-group">
                     <span className="input-group-addon">
@@ -27,7 +27,7 @@ class Register extends Component {
               </div>
 
               <div className="form-group">
-                <label for="username" className="cols-sm-2 control-label">Username</label>
+                <label className="cols-sm-2 control-label">Username</label>
                 <div className="cols-sm-10">
                   <div className="input-group">
                     <span className="input-group-addon">
@@ -39,7 +39,7 @@ class Register extends Component {
               </div>
 
               <div className="form-group">
-                <label for="password" className="cols-sm-2 control-label">Password</label>
+                <label className="cols-sm-2 control-label">Password</label>
                 <div className="cols-sm-10">
                   <div className="input-group">
                     <span className="input-group-addon">
@@ -51,7 +51,7 @@ class Register extends Component {
               </div>
 
               <div className="form-group">
-                <label for="confirm" className="cols-sm-2 control-label">Confirm Password</label>
+                <label className="cols-sm-2 control-label">Confirm Password</label>
                 <div className="cols-sm-10">
                   <div className="input-group">
                     <span className="input-group-addon">

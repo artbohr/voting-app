@@ -15,7 +15,7 @@ class Login extends Component {
           <form className="form-horizontal" method="post" action="#">
 
             <div className="form-group">
-              <label for="username" className="cols-sm-2 control-label">Username</label>
+              <label className="cols-sm-2 control-label">Username</label>
               <div className="cols-sm-10">
                 <div className="input-group">
                   <span className="input-group-addon">
@@ -27,7 +27,7 @@ class Login extends Component {
             </div>
 
             <div className="form-group">
-              <label for="password" className="cols-sm-2 control-label">Password</label>
+              <label className="cols-sm-2 control-label">Password</label>
               <div className="cols-sm-10">
                 <div className="input-group">
                   <span className="input-group-addon">
