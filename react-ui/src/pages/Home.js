@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ShowPoll from '../components/ShowPoll';
 
 class Home extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Home extends Component {
 
   render() {
     const polls = this.state.fetchedData.map(d =>
-      <ul key={d._id}>PollName: {d.pollName} <br/> Options: {d.options.map(option => <li key={option}>{option}</li>)}</ul>)
+      <ShowPoll key={d._id} pollName={d.pollName} pollOptions={d.options.map(option => <li key={option}>{option}</li>)}/>)
 
     return (
       <div>
