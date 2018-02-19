@@ -7,8 +7,9 @@ const pollSchema = mongoose.Schema({
   },
   options: {
     type: [String],
-     required: true
-  }
+    required: true
+  },
+  votes: []
 });
 
 const Poll = mongoose.model("Poll", pollSchema);

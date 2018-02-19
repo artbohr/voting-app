@@ -104,8 +104,8 @@ app.post('/api/register', (req, res) => {
 
 // create a single poll
 app.post('/api/createpoll', (req, res) => {
-  const pollForm = new Poll({pollName: req.body.pollName, options: req.body.options});
-  pollForm.save(err=> console.log(err));
+  const pollForm = new Poll({pollName: req.body.pollName, options: req.body.options, votes: new Array(req.body.options.length).fill(0)});
+  pollForm.save();
 
   res.status(201).send("saved " + pollForm);
 });
@@ -127,12 +127,18 @@ app.route('/api/poll/:id')
       res.send(doc);
     });
   })
-  // vote on the poll
+
+  // vote on the poll (use body: voteOn )
   .post((req, res) => {
-    Poll.findById(req.params.id, (err, doc) => {
-      // do something
+    Poll.findByIdAndUpdate(
+    req.params.id,
+    {$inc: {[`votes.${req.body.voteOn}`]: 1 }},
+    (err, doc) => {
+      console.log(err);
+      res.send(doc);
     });
   })
+
   // modify a poll
   .put((req, res) => {
     Poll.findById(req.params.id, (err, doc) => {
