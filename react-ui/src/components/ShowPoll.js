@@ -8,7 +8,15 @@ class ShowForm extends React.Component {
           {this.props.pollName}
         </div>
         <div className="panel-body">
-          {this.props.pollOptions}
+          <form>
+            <div className="form-group">
+              <label>Select Option</label>
+              <select className="form-control">
+                  {this.props.pollOptions}
+              </select>
+            </div>
+            <button className='btn btn-block btn-primary center-block' type='submit'>Vote</button>
+          </form>
         </div>
       </div>
     )

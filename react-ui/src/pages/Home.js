@@ -19,7 +19,7 @@ class Home extends Component {
 
   render() {
     const polls = this.state.fetchedData.map(d =>
-      <ShowPoll key={d._id} pollName={d.pollName} pollOptions={d.options.map(option => <li key={option}>{option}</li>)}/>)
+      <ShowPoll key={d._id} pollName={d.pollName} pollOptions={d.options.map(option => <option key={option}>{option}</option>)}/>)
 
     return (
       <div>
