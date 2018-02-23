@@ -15,3 +15,7 @@ p{
   position: fixed;
   bottom: 0;
 }
+
+#pollsHolder{
+  margin: 15px;
+}
