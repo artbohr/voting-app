@@ -2,12 +2,33 @@ import React from 'react';
 import {Pie} from 'react-chartjs-2';
 
 class ShowForm extends React.Component {
-  render() {
+  constructor (props) {
+    super(props)
+    this.state = {
+       votingOption: 0,
+       reload: false
+     };
+  }
+  submitVote = (e) => {
+    e.preventDefault();
 
+    const url = `http://localhost:5000/api/poll/${this.props.pollId}`;
+
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({'voteOn' : this.state.votingOption }),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    }).then(res => alert("Thanks for voting!"))
+    .catch(error => console.error('Error:', error));  
+  }
+
+  render() {
     const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#F19CBB', '#D1001C', '#7F3E98', '#4682BF', '#D2691E']
 
     const data = {
-      labels: this.props.pollOptions.map(d => d.key),
+      labels: this.props.pollOptions.map(d => d),
       datasets: [
         {
           data: this.props.pollVotes,
@@ -22,12 +43,12 @@ class ShowForm extends React.Component {
         {this.props.pollName}
       </div>
       <div className="panel-body">
-        <form>
+        <form onSubmit={this.submitVote}>
           <div className="row form-group">
             <div className="col-sm-5">
               <label>Select Option</label>
-              <select className="form-control">
-                {this.props.pollOptions}
+              <select className="form-control" onChange={e => this.setState({ votingOption: e.target.value })}>
+                {this.props.pollOptions.map((option, i) => <option key={option} value={i}>{option}</option>)}
               </select>
               <br/>
               <button className='btn btn-block btn-primary center-block' type='submit'>Vote</button>
