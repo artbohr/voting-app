@@ -12,7 +12,7 @@ class ShowForm extends React.Component {
   submitVote = (e) => {
     e.preventDefault();
 
-    const url = `http://localhost:5000/api/poll/${this.props.pollId}`;
+    const url = `${this.props.url}${this.props.pollId}`;
 
     fetch(url, {
       method: 'POST',
@@ -21,7 +21,7 @@ class ShowForm extends React.Component {
         'Content-Type': 'application/json'
       })
     }).then(res => alert("Thanks for voting!"))
-    .catch(error => console.error('Error:', error));  
+    .catch(error => console.error('Error:', error));
   }
 
   render() {
