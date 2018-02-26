@@ -16,7 +16,7 @@ class Navigation extends React.Component {
             <ul className="nav navbar-nav navbar-right">
               <li>
                 <NavLink to="/polls" activeStyle={{ 'backgroundColor': 'white' }}>
-                  Polls
+                  Create Polls
                 </NavLink>
               </li>
               <li>
