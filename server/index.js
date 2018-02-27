@@ -97,7 +97,7 @@ app.post('/api/register', (req, res) => {
       const userForm = new User({username: req.body.username, password: User.generateHash(req.body.password)});
       userForm.save(err=> console.log(err));
 
-      res.send("created");
+      res.send('created')
     }
   });
 });

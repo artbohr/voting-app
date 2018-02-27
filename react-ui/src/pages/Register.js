@@ -1,6 +1,44 @@
 import React, {Component} from 'react';
+import { Route, Redirect } from 'react-router'
 
 class Register extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+       username: "",
+       password: "",
+       confirmation: ""
+     };
+  }
+
+  registerUser = (e) => {
+    e.preventDefault();
+
+    if (this.state.password === this.state.confirmation) {
+      fetch('http://localhost:5000/api/register/', {
+        method: 'POST',
+        body: JSON.stringify(
+          {'username' : this.state.username, 'password': this.state.password }
+        ),
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      }).then(res => alert('Thank you for registring'))
+        .catch(error => console.error('Error:', error));
+
+      this.setState({
+        'username': "",
+        'password': "",
+        'confirmation': ""
+      });
+    }
+
+    else {
+      alert('Try again');
+    }
+
+  }
+
   render() {
     return (
       <div className="container register">
@@ -12,19 +50,7 @@ class Register extends Component {
             </div>
           </div>
           <div className="main-login main-center">
-            <form className="form-horizontal" method="post" action="#">
-
-              <div className="form-group">
-                <label className="cols-sm-2 control-label">Your Email</label>
-                <div className="cols-sm-10">
-                  <div className="input-group">
-                    <span className="input-group-addon">
-                      <i className="fa fa-envelope fa" aria-hidden="true"></i>
-                    </span>
-                    <input type="text" className="form-control" name="email" id="email" placeholder="Enter your Email"/>
-                  </div>
-                </div>
-              </div>
+            <form className="form-horizontal" onSubmit={this.registerUser}>
 
               <div className="form-group">
                 <label className="cols-sm-2 control-label">Username</label>
@@ -33,7 +59,7 @@ class Register extends Component {
                     <span className="input-group-addon">
                       <i className="fa fa-users fa" aria-hidden="true"></i>
                     </span>
-                    <input type="text" className="form-control" name="username" id="username" placeholder="Enter your Username"/>
+                    <input onChange={e => this.setState({ 'username': e.target.value })} placeholder='Enter your username' className='form-control'/> <br />
                   </div>
                 </div>
               </div>
@@ -45,7 +71,7 @@ class Register extends Component {
                     <span className="input-group-addon">
                       <i className="fa fa-lock fa-lg" aria-hidden="true"></i>
                     </span>
-                    <input type="password" className="form-control" name="password" id="password" placeholder="Enter your Password"/>
+                    <input onChange={e => this.setState({ 'password': e.target.value })} placeholder='Enter your password' className='form-control'/> <br />
                   </div>
                 </div>
               </div>
@@ -57,13 +83,13 @@ class Register extends Component {
                     <span className="input-group-addon">
                       <i className="fa fa-lock fa-lg" aria-hidden="true"></i>
                     </span>
-                    <input type="password" className="form-control" name="confirm" id="confirm" placeholder="Confirm your Password"/>
+                    <input onChange={e => this.setState({ 'confirmation': e.target.value })} placeholder='Confirm Password' className='form-control'/> <br />
                   </div>
                 </div>
               </div>
 
               <div className="form-group ">
-                <button type="button" className="btn btn-sm btn-primary login-button">Register</button>
+                <button type='submit' className="btn btn-sm btn-primary login-button">Register</button>
               </div>
 
             </form>
