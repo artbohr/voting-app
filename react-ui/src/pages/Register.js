@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Route, Redirect } from 'react-router'
 
 class Register extends Component {
   constructor (props) {
@@ -23,8 +22,8 @@ class Register extends Component {
         headers: new Headers({
           'Content-Type': 'application/json'
         })
-      }).then(res => alert('Thank you for registring'))
-        .catch(error => console.error('Error:', error));
+      }).then(res => window.location.href='/')
+      .catch(error => console.error('Error:', error));
 
       this.setState({
         'username': "",
