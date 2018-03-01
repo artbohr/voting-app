@@ -24,6 +24,21 @@ class ShowForm extends React.Component {
     .catch(error => console.error('Error:', error));
   }
 
+  deletePoll = (e) => {
+    e.preventDefault();
+
+    const url = `${this.props.url}${this.props.pollId}`;
+
+    fetch(url, {
+      method: 'DELETE',
+      body: JSON.stringify({}),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    }).then(res => alert("Poll deleted!"))
+    .catch(error => console.error('Error:', error));
+  }
+
   render() {
     const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#F19CBB', '#D1001C', '#7F3E98', '#4682BF', '#D2691E']
 
@@ -41,6 +56,9 @@ class ShowForm extends React.Component {
     return (<div className="panel panel-default">
       <div className="panel-heading">
         {this.props.pollName}
+        <button type="button" class="close" onClick={this.deletePoll}>
+          <span aria-hidden="true">Delete</span>
+        </button>
       </div>
       <div className="panel-body">
         <form onSubmit={this.submitVote}>
