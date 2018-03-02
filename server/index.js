@@ -144,9 +144,10 @@ app.route('/api/poll/:id')
     Poll.findById(req.params.id, (err, doc) => {
       if (err) res.send(err);
 
-      doc.pollName = req.body.pollName;
+      //doc.pollName = req.body.pollName;
       doc.options = req.body.options;
       doc.save();
+      console.log(doc)
       res.send(doc);
     });
   })
