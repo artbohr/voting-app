@@ -42,7 +42,7 @@ class ShowForm extends React.Component {
 
   addOptions = (e) => {
     e.preventDefault();
-    
+
     const url = `${this.props.url}${this.props.pollId}`;
     const optionsArr = JSON.parse(JSON.stringify(this.props.pollOptions));
     optionsArr.push(this.state.addOptions);
