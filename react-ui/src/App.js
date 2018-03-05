@@ -3,7 +3,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { Switch, Route } from 'react-router-dom'
 
 import Navigation from './components/Navigation';
-//import Footer from './components/Footer';
 import Home from './pages/Home';
 import Polls from './pages/Polls';
 import NotFound from './pages/NotFound';
@@ -23,7 +22,6 @@ class App extends Component {
             <Route path='/register' component={Register}/>
             <Route component={NotFound} />
           </Switch>
-          {/*<Footer/>*/}
         </div>
       </BrowserRouter>
     );

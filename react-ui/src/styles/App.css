@@ -10,12 +10,6 @@ p{
   width: 350px;
 }
 
-.footer{
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-}
-
 #pollsHolder{
   margin: 15px;
 }
