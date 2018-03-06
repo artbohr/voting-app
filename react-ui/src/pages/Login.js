@@ -41,7 +41,6 @@ class Login extends Component {
         </div>
         <div className="main-login main-center">
           <form className="form-horizontal">
-
             <div className="form-group">
               <label className="cols-sm-2 control-label">Username</label>
               <div className="cols-sm-10">
@@ -53,7 +52,6 @@ class Login extends Component {
                 </div>
               </div>
             </div>
-
             <div className="form-group">
               <label className="cols-sm-2 control-label">Password</label>
               <div className="cols-sm-10">
@@ -65,11 +63,9 @@ class Login extends Component {
                 </div>
               </div>
             </div>
-
             <div className="form-group ">
               <button type="button" className="btn btn-sm btn-primary login-button" onClick={this.loginUser}>Login</button>
             </div>
-
           </form>
         </div>
       </div>

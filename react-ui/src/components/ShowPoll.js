@@ -6,7 +6,6 @@ class ShowForm extends React.Component {
     super(props)
     this.state = {
        votingOption: 0,
-       reload: false,
        addOptions: ""
      };
   }
@@ -59,6 +58,10 @@ class ShowForm extends React.Component {
     .catch(error => console.error('Error:', error));
   }
 
+  componentWillUpdate(){
+    //this.forceUpdate();
+  }
+
   render() {
     const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#F19CBB', '#D1001C', '#7F3E98', '#4682BF', '#D2691E']
 
@@ -90,12 +93,10 @@ class ShowForm extends React.Component {
               </select>
               <br/>
               <button onClick={this.submitVote} className='btn btn-block btn-primary center-block'>Vote</button>
-
               <div style={{display:'flex'}}>
                 <input style={{marginTop:'15px'}} onChange={e => this.setState({ addOptions: e.target.value })} placeholder='Add another option' className='form-control'/> <br />
                 <button style={{margin:'15px'}} className="btn btn-primary" onClick={this.addOptions}>Add</button>
               </div>
-
             </div>
             <div className="col-sm-5">
               <Pie data={data} width={20} height={5} /*options={{maintainAspectRatio: false}}*//>

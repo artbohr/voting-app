@@ -38,11 +38,9 @@ class PollForm extends React.Component {
                   <label>Options:</label>
                   <input onChange={e => this.setState({ options: e.target.value })} placeholder='Enter your options, separated by commas' className='form-control'/> <br />
                 </div>
-
                   <div className='col-sm-4 col-sm-offset-4'>
                     <button className='btn btn-block btn-primary center-block' type='submit'>Create</button>
                   </div>
-
               </form>
             </div>
           </div>

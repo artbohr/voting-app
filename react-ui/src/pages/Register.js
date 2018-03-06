@@ -30,12 +30,9 @@ class Register extends Component {
         'password': "",
         'confirmation': ""
       });
-    }
-
-    else {
+    } else {
       alert('Try again');
     }
-
   }
 
   render() {
@@ -50,7 +47,6 @@ class Register extends Component {
           </div>
           <div className="main-login main-center">
             <form className="form-horizontal" onSubmit={this.registerUser}>
-
               <div className="form-group">
                 <label className="cols-sm-2 control-label">Username</label>
                 <div className="cols-sm-10">
@@ -62,7 +58,6 @@ class Register extends Component {
                   </div>
                 </div>
               </div>
-
               <div className="form-group">
                 <label className="cols-sm-2 control-label">Password</label>
                 <div className="cols-sm-10">
@@ -74,7 +69,6 @@ class Register extends Component {
                   </div>
                 </div>
               </div>
-
               <div className="form-group">
                 <label className="cols-sm-2 control-label">Confirm Password</label>
                 <div className="cols-sm-10">
@@ -86,11 +80,9 @@ class Register extends Component {
                   </div>
                 </div>
               </div>
-
               <div className="form-group ">
                 <button type='submit' className="btn btn-sm btn-primary login-button">Register</button>
               </div>
-
             </form>
           </div>
         </div>
