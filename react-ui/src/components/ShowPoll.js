@@ -58,10 +58,6 @@ class ShowForm extends React.Component {
     .catch(error => console.error('Error:', error));
   }
 
-  componentWillUpdate(){
-    //this.forceUpdate();
-  }
-
   render() {
     const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#F19CBB', '#D1001C', '#7F3E98', '#4682BF', '#D2691E']
 
@@ -99,7 +95,7 @@ class ShowForm extends React.Component {
               </div>
             </div>
             <div className="col-sm-5">
-              <Pie data={data} width={20} height={5} /*options={{maintainAspectRatio: false}}*//>
+              <Pie data={data} width={20} height={5}/>
             </div>
           </div>
         </form>
