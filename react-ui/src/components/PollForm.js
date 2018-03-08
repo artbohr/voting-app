@@ -12,7 +12,7 @@ class PollForm extends React.Component {
   createPoll = (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:5000/api/createpoll/', {
+    fetch('http://vote-app-000.herokuapp.com/api/createpoll/', {
       method: 'POST',
       body: JSON.stringify(
         {'pollName' : this.state.question, 'options': this.state.options.split(",") }

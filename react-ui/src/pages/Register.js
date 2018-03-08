@@ -14,7 +14,7 @@ class Register extends Component {
     e.preventDefault();
 
     if (this.state.password === this.state.confirmation) {
-      fetch('http://localhost:5000/api/register/', {
+      fetch('http://vote-app-000.herokuapp.com/api/register/', {
         method: 'POST',
         body: JSON.stringify(
           {'username' : this.state.username, 'password': this.state.password }

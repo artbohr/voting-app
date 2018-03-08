@@ -18,7 +18,7 @@ class Navigation extends React.Component {
                 <NavLink to="/polls" activeStyle={{ 'backgroundColor': 'white' }}>
                   Create Polls
                 </NavLink>
-              </li>
+              </li>{/*
               <li>
                 <NavLink to="/login" activeStyle={{ 'backgroundColor': 'white' }}>
                   Login
@@ -28,7 +28,7 @@ class Navigation extends React.Component {
                 <NavLink to="/register" activeStyle={{ 'backgroundColor': 'white' }}>
                   Register
                 </NavLink>
-              </li>
+              </li>*/}
             </ul>
           </div>
         </div>

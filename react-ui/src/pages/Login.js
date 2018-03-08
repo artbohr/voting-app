@@ -12,7 +12,7 @@ class Login extends Component {
   loginUser = (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:5000/api/login', {
+    fetch('http://vote-app-000.herokuapp.com/api/login', {
       method: 'POST',
       body: JSON.stringify(
         {'username' : this.state.username, 'password': this.state.password }

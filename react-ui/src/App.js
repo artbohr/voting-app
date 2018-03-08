@@ -6,8 +6,8 @@ import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import Polls from './pages/Polls';
 import NotFound from './pages/NotFound';
-import Login from './pages/Login';
-import Register from './pages/Register';
+//import Login from './pages/Login';
+//import Register from './pages/Register';
 
 class App extends Component {
   render() {
@@ -18,8 +18,8 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Home}/>
             <Route path='/polls' component={Polls}/>
-            <Route path='/login' component={Login}/>
-            <Route path='/register' component={Register}/>
+            {/*<Route path='/login' component={Login}/>
+            <Route path='/register' component={Register}/>*/}
             <Route component={NotFound} />
           </Switch>
         </div>

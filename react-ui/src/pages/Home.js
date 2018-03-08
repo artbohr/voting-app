@@ -6,7 +6,7 @@ class Home extends Component {
     super(props);
     this.state = {
       fetchedData: [],
-      url: 'http://localhost:5000/api/poll/'
+      url: 'http://vote-app-000.herokuapp.com/api/poll/'
     };
   }
 
