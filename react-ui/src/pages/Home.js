@@ -11,6 +11,10 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData = () =>{
     fetch('/api/polls').then(response => {
       response.json().then(data=>(this.setState({fetchedData: data})))
     }).catch(e => {
@@ -20,7 +24,7 @@ class Home extends Component {
 
   render() {
     const polls = this.state.fetchedData.map(d =>
-      <ShowPoll key={d._id} pollId={d._id} pollName={d.pollName} pollOptions={d.options} pollVotes={d.votes} url={this.state.url}/>)
+      <ShowPoll key={d._id} pollId={d._id} pollName={d.pollName} pollOptions={d.options} pollVotes={d.votes} url={this.state.url} fetchData={this.fetchData}/>)
 
     return (
       <div id="pollsHolder">

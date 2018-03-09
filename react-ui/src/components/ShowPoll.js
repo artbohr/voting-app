@@ -22,6 +22,8 @@ class ShowForm extends React.Component {
       })
     }).then(res => alert("Thanks for voting!"))
     .catch(error => console.error('Error:', error));
+
+    this.props.fetchData();
   }
 
   deletePoll = (e) => {
@@ -56,6 +58,8 @@ class ShowForm extends React.Component {
       })
     }).then(res => alert("Option Added!"))
     .catch(error => console.error('Error:', error));
+
+    this.props.fetchData();
   }
 
   render() {
